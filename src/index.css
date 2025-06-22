@@ -13,9 +13,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-
-  
 }
 
 a {
@@ -27,11 +24,12 @@ a:hover {
   color: #535bf2;
 }
 
+
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  /* place-items: center; */
+  /* min-width: 320px; */
   min-height: 100vh;
   background: var(--md-sys-color-background);
 }
@@ -78,6 +76,7 @@ button:focus-visible {
 }
 
 .current-weather-box{
-  background-color: var(--md-sys-color-inverse-on-surface);
-  padding: var(--md-sys-shape-corner-large);
+  background-color: var(--md-sys-color-secondary-container);
+  padding: 2rem;
+  border-radius: 2rem;
 }

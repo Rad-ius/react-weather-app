@@ -1,9 +1,12 @@
 import getCurrentLocation from "./getCurrentLocation";
+
+const API_key = import.meta.env.VITE_OPEN_API_KEY;
+
 const getWeatherData = async () => {
     try {
         const { latitude: lat, longitude: lon } = await getCurrentLocation();
         const response = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,apparent_temperature,weather_code&timezone=auto`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_key}&units=metric`
         );
         const data = await response.json();
         return data;
