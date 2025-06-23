@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import getWeatherData from '../services/getWeatherData'
 import getWeatherDataByCity from '../services/getWeatherDataByCity'
+import '@material/web/textfield/filled-text-field.js';
+import '@material/web/button/filled-button.js';
+
+import { fetchSearchForecastData } from '../services/fetchSearchForecastData'
+
 const CurrentWeather = () => {
 
     const[weatherData, setWeatherData] = useState("")
     const[searchInput, setSearchInput] = useState('')
+
 
     // Get Weather Data
     useEffect(() => {
@@ -35,7 +41,10 @@ const CurrentWeather = () => {
                 console.error(error)
             }
         }
+        localStorage.setItem('lastCity', searchInput);
+        
         fetchSearchWeatherData()
+        
     }
 
 
@@ -50,14 +59,26 @@ const CurrentWeather = () => {
 
     return (
         <>
-        <form onSubmit={handleSeachInput}>
-        <input type="text" 
-        value= {searchInput} 
-        onChange={handleSearchChange}
-        placeholder='Search For A City'
-        />
-        <input type="submit"/>
-        </form>
+        <div >
+            <form onSubmit={handleSeachInput} id="search-bar">
+                <md-filled-text-field 
+                placeholder="Search for a city"
+                type="text"
+                value= {searchInput} 
+                onChange={handleSearchChange}
+                >
+                    <md-icon slot="leading-icon">
+                        <span class="material-symbols-outlined">
+                        search
+                        </span>
+                    </md-icon>
+                </md-filled-text-field>
+                <md-filled-button type="submit">Submit</md-filled-button>
+            </form>
+    
+
+        
+        </div>
 
             <div className="current-weather-box">
                 <div className="current-location">

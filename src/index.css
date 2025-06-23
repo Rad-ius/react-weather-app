@@ -75,8 +75,19 @@ button:focus-visible {
   }
 }
 
-.current-weather-box{
-  background-color: var(--md-sys-color-secondary-container);
+.current-weather-box, .forecast-card{
+  background-color: var(--md-sys-color-primary-container);
   padding: 2rem;
   border-radius: 2rem;
+}
+
+.forecast-card{
+  display: flex;
+  gap: 1rem;
+  background-color: var(--md-sys-color-tertiary-container);
+}
+
+.daily-forecast{
+  display: flex;
+  flex-flow: column nowrap;
 }
