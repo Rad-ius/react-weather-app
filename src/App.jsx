@@ -12,7 +12,6 @@ function App() {
     
       <Theme/>
       <CurrentWeather/>
-      <Forecast/>
     
     </>
   )

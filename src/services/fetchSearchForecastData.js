@@ -1,8 +1,6 @@
 const API_key = import.meta.env.VITE_OPEN_API_KEY
 
-let searchInput = localStorage.getItem('lastCity')
-
-export const fetchSearchForecastData = async ()=>{
+export const fetchSearchForecastData = async (searchInput)=>{
     try {
         const response = await fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput}&appid=${API_key}&units=metric`

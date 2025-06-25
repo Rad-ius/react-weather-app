@@ -3,6 +3,7 @@ import getWeatherData from '../services/getWeatherData'
 import getWeatherDataByCity from '../services/getWeatherDataByCity'
 import '@material/web/textfield/filled-text-field.js';
 import '@material/web/button/filled-button.js';
+import Forecast from './Forecast';
 
 import { fetchSearchForecastData } from '../services/fetchSearchForecastData'
 
@@ -92,6 +93,8 @@ const CurrentWeather = () => {
                 
                 
             </div>
+
+            <Forecast input={currentCityName}/>
         </>
     )
     }

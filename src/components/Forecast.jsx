@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import getForecastData from '../services/getForecastData';
 import { fetchSearchForecastData } from '../services/fetchSearchForecastData';
-const Forecast = () => {
+const Forecast = ({input}) => {
     const[forecastData,setForecastData] = useState(null)
     
 
     useEffect(() => {
         const fetchForecastData = async () => {
             try {
-                const data = await getForecastData();
+                const data = input ? await fetchSearchForecastData(input) : await getForecastData();
                 setForecastData(data.list);
                 console.log(data.list)
             } catch (error) {
@@ -16,9 +16,8 @@ const Forecast = () => {
             }
         };
         fetchForecastData();
-        fetchSearchForecastData()
         
-    }, []);
+    }, [setForecastData]);
     
     if (!forecastData) {
         return <div>Loading forecast...</div>;
