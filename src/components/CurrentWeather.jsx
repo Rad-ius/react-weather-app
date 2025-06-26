@@ -4,13 +4,17 @@ import getWeatherDataByCity from '../services/getWeatherDataByCity'
 import '@material/web/textfield/filled-text-field.js';
 import '@material/web/button/filled-button.js';
 import Forecast from './Forecast';
+import fetchCityImage from '../services/fetchCityImage';
+import fetchCurrentCityImage from '../services/fetchCurrentCityImage';
+import CityImage from './CityImage';
 
-import { fetchSearchForecastData } from '../services/fetchSearchForecastData'
+
 
 const CurrentWeather = () => {
 
     const[weatherData, setWeatherData] = useState("")
     const[searchInput, setSearchInput] = useState('')
+    const[imgData, setImgData] = useState(null)
 
 
     // Get Weather Data
@@ -19,12 +23,27 @@ const CurrentWeather = () => {
             try {
                 const data = await getWeatherData();
                 setWeatherData(data);
+                
+
             } catch (error) {
                 console.error("Error fetching initial weather data:", error);
             }
         };
+        console.log(imgData)
         fetchInitialWeatherData();
     }, []);
+
+    useEffect(()=>{
+        const fetchInitialImageData = async()=>{
+            try{
+                const data = await fetchCurrentCityImage(currentCityName)
+                setImgData(data)
+            }catch(error){
+                console.error(error)
+            }
+        }
+        fetchInitialImageData()
+    },[])
 
 
     function handleSeachInput(e){
@@ -42,10 +61,22 @@ const CurrentWeather = () => {
                 console.error(error)
             }
         }
+        
+        const fetchCityImgData = async (searchInput)=>{
+            try{
+                const data = await fetchCityImage(searchInput)
+                setImgData(data)
+                
+            }catch(error){
+                console.error(error)
+            }
+        }
+        
+        setImgData(searchInput);
         localStorage.setItem('lastCity', searchInput);
         
         fetchSearchWeatherData()
-        
+        fetchCityImgData(searchInput)
     }
 
 
@@ -57,6 +88,9 @@ const CurrentWeather = () => {
     const tempUnit = weatherData.current_units?.temperature_2m;
     const apparentTemp = weatherData.main?.feels_like.toFixed(0)
     let currentCityName = weatherData.name
+    localStorage.setItem("currentCity", currentCityName)
+
+    
 
     return (
         <>
@@ -69,7 +103,7 @@ const CurrentWeather = () => {
                 onChange={handleSearchChange}
                 >
                     <md-icon slot="leading-icon">
-                        <span class="material-symbols-outlined">
+                        <span className="material-symbols-outlined">
                         search
                         </span>
                     </md-icon>
@@ -95,6 +129,7 @@ const CurrentWeather = () => {
             </div>
 
             <Forecast input={currentCityName}/>
+            {<CityImage src={imgData} alt={currentCityName}/>}
         </>
     )
     }

@@ -3,6 +3,7 @@ import getForecastData from '../services/getForecastData';
 import { fetchSearchForecastData } from '../services/fetchSearchForecastData';
 const Forecast = ({input}) => {
     const[forecastData,setForecastData] = useState(null)
+    const[imgData, setImgData] = useState(null)
     
 
     useEffect(() => {

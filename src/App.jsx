@@ -3,15 +3,17 @@ import { useState } from 'react'
 import './App.css'
 import Theme from './components/Theme'
 import CurrentWeather from './components/CurrentWeather'
-import Forecast from './components/Forecast'
+import fetchCityImage from './services/fetchCityImage'
 
 
 function App() {
+  fetchCityImage()
   return (
     <>
     
       <Theme/>
       <CurrentWeather/>
+      
     
     </>
   )
