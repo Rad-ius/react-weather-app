@@ -17,7 +17,7 @@ const Forecast = ({input}) => {
         };
         fetchForecastData();
         
-    }, [setForecastData]);
+    }, [input]);
     
     if (!forecastData) {
         return <div>Loading forecast...</div>;
